@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.net.SocketOption;
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -24,7 +24,8 @@ public class DrinkShopController {
     @FXML private TableColumn<Product, Double> colProdPrice;
     @FXML private TableColumn<Product, CategorieBautura> colProdCategorie;
     @FXML private TableColumn<Product, TipBautura> colProdTip;
-    @FXML private TextField txtProdName, txtProdPrice;
+    @FXML private TextField txtProdName;
+    @FXML private TextField txtProdPrice;
     @FXML private ComboBox<CategorieBautura> comboProdCategorie;
     @FXML private ComboBox<TipBautura> comboProdTip;
 
@@ -36,7 +37,8 @@ public class DrinkShopController {
     @FXML private TableView<IngredientReteta> newRetetaTable;
     @FXML private TableColumn<IngredientReteta, String> colNewIngredName;
     @FXML private TableColumn<IngredientReteta, Double> colNewIngredCant;
-    @FXML private TextField txtNewIngredName, txtNewIngredCant;
+    @FXML private TextField txtNewIngredName;
+    @FXML private TextField txtNewIngredCant;
 
     // ---------- ORDER (CURRENT) ----------
     @FXML private TableView<OrderItem> currentOrderTable;
@@ -118,7 +120,7 @@ public class DrinkShopController {
             showError("Selectati o reteta pentru care adugati un produs");
             return;
         }else
-        if (service.getAllProducts().stream().filter(p->p.getId()==r.getId()).toList().size()>0) {
+        if (!service.getAllProducts().stream().filter(p->p.getId()==r.getId()).toList().isEmpty()) {
             showError("Exista un produs cu reteta adaugata.");
             return;
         }
