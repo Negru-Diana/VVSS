@@ -8,20 +8,20 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class DailyReportService {
-    private Repository<Integer, Order> repo;
+    private Repository<Integer, Order> orderRepo;
 
-    public DailyReportService(Repository<Integer, Order> repo) {
-        this.repo = repo;
+    public DailyReportService(Repository<Integer, Order> orderRepo) {
+        this.orderRepo = orderRepo;
     }
 
     public double getTotalRevenue() {
-        return repo.findAll().stream().mapToDouble(Order::getTotal).sum();
+        return orderRepo.findAll().stream().mapToDouble(Order::getTotal).sum();
     }
 
     public int getTotalOrders() {
 //        List<Order> orders = StreamSupport.stream(repo.findAll().spliterator(), false)
 //                .collect(Collectors.toList());
 
-        return repo.findAll().size();
+        return orderRepo.findAll().size();
     }
 }

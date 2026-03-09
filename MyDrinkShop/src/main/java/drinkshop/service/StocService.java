@@ -4,33 +4,26 @@ import drinkshop.domain.IngredientReteta;
 import drinkshop.domain.Reteta;
 import drinkshop.domain.Stoc;
 import drinkshop.repository.Repository;
+import drinkshop.service.validator.StocValidator;
 
 import java.util.List;
 import java.util.Map;
 
 public class StocService {
 
+    private final StocValidator stocValidator = new StocValidator();
     private final Repository<Integer, Stoc> stocRepo;
 
     public StocService(Repository<Integer, Stoc> stocRepo) {
         this.stocRepo = stocRepo;
     }
 
-    public List<Stoc> getAll() {
-        return stocRepo.findAll();
-    }
 
     public void add(Stoc s) {
+        stocValidator.validate(s);
         stocRepo.save(s);
     }
 
-    public void update(Stoc s) {
-        stocRepo.update(s);
-    }
-
-    public void delete(int id) {
-        stocRepo.delete(id);
-    }
 
     public boolean areSuficient(Reteta reteta) {
         List<IngredientReteta> ingredienteNecesare = reteta.getIngrediente();

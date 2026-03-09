@@ -2,11 +2,13 @@ package drinkshop.service;
 
 import drinkshop.domain.Reteta;
 import drinkshop.repository.Repository;
+import drinkshop.service.validator.RetetaValidator;
 
 import java.util.List;
 
 public class RetetaService {
 
+    private final RetetaValidator retetaValidator = new RetetaValidator();
     private final Repository<Integer, Reteta> retetaRepo;
 
     public RetetaService(Repository<Integer, Reteta> retetaRepo) {
@@ -14,6 +16,7 @@ public class RetetaService {
     }
 
     public void addReteta(Reteta r) {
+        retetaValidator.validate(r);
         retetaRepo.save(r);
     }
 

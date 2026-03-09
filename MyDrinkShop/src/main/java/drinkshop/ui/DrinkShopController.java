@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.SocketOption;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -114,19 +115,37 @@ public class DrinkShopController {
         Reteta r=retetaTable.getSelectionModel().getSelectedItem();
 
         if (r == null) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText("Selectati o reteta pentru care adugati un produs");
-            alert.showAndWait();
+            showError("Selectati o reteta pentru care adugati un produs");
             return;
         }else
         if (service.getAllProducts().stream().filter(p->p.getId()==r.getId()).toList().size()>0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Error");
-            alert.setHeaderText("Exista un produs cu reteta adaugata.");
-            alert.showAndWait();
+            showError("Exista un produs cu reteta adaugata.");
             return;
         }
+
+        String numeProdus = txtProdName.getText().trim();
+        if (numeProdus.isEmpty()) {
+            showError("Numele produsului nu poate fi gol!");
+            return;
+        }
+
+        double pret = 0;
+        try {
+            pret = Double.parseDouble(txtProdPrice.getText().trim());
+            if (pret <= 0) {
+                showError("Pretul trebuie sa fie un numar pozitiv!");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            showError("Pretul introdus nu este un numar valid (ex: 15.50)");
+            return;
+        }
+
+        if (comboProdCategorie.getValue() == null || comboProdTip.getValue() == null) {
+            showError("Selectati categoria si tipul bauturii!");
+            return;
+        }
+
         Product p = new Product(r.getId(),
                 txtProdName.getText(),
                 Double.parseDouble(txtProdPrice.getText()),
@@ -167,8 +186,32 @@ public class DrinkShopController {
     // ---------- RETETA NOUA ----------
     @FXML
     private void onAddNewIngred() {
-        newRetetaList.add(new IngredientReteta(txtNewIngredName.getText(),
-                Double.parseDouble(txtNewIngredCant.getText())));
+        String nameInput = txtNewIngredName.getText();
+        String cantInput = txtNewIngredCant.getText();
+
+        if (nameInput == null || nameInput.trim().isEmpty()) {
+            showError("Numele ingredientului nu poate fi gol!");
+            return;
+        }
+
+        double cantitate = 0;
+        try {
+
+            cantitate = Double.parseDouble(cantInput.trim());
+
+            if (cantitate <= 0) {
+                showError("Cantitatea trebuie să fie un număr mai mare decât 0!");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            showError("Vă rugăm introduceți o valoare numerică validă pentru cantitate");
+            return;
+        }
+
+        newRetetaList.add(new IngredientReteta(nameInput.trim(), cantitate));
+
+        txtNewIngredName.clear();
+        txtNewIngredCant.clear();
     }
 
     @FXML
@@ -245,6 +288,9 @@ public class DrinkShopController {
     @FXML
     private void onExportOrdersCsv() {
         service.exportCsv("orders.csv");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Csv Exportat cu succes");
+        alert.showAndWait();
     }
 
     @FXML

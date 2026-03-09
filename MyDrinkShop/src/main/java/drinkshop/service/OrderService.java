@@ -4,11 +4,13 @@ import drinkshop.domain.Order;
 import drinkshop.domain.OrderItem;
 import drinkshop.domain.Product;
 import drinkshop.repository.Repository;
+import drinkshop.service.validator.OrderValidator;
 
 import java.util.List;
 
 public class OrderService {
 
+    private final OrderValidator orderValidator = new OrderValidator();
     private final Repository<Integer, Order> orderRepo;
     private final Repository<Integer, Product> productRepo;
 
@@ -19,6 +21,7 @@ public class OrderService {
     }
 
     public void addOrder(Order o) {
+        orderValidator.validate(o);
         orderRepo.save(o);
     }
 
@@ -31,8 +34,6 @@ public class OrderService {
     }
 
     public List<Order> getAllOrders() {
-//        return StreamSupport.stream(orderRepo.findAll().spliterator(), false)
-//                .collect(Collectors.toList());
         return orderRepo.findAll();
     }
 

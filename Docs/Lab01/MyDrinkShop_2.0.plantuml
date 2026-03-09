@@ -6,7 +6,6 @@ skinparam linetype ortho
 package "ui" {
   class DrinkShopApp
   class DrinkShopController
-  class ErrorHandler
 }
 
 package "service" {
@@ -19,6 +18,17 @@ package "service" {
   class UserService
   class CsvExporter
   class ReceiptGenerator
+
+  package "validator" {
+    interface Validator<T> << interface >>
+    class ValidationException
+    class OrderValidator
+    class OrderItemValidator
+    class ProductValidator
+    class RetetaValidator
+    class StocValidator
+    class UserValidator
+  }
 }
 
 package "repository" {
@@ -44,17 +54,6 @@ package "domain" {
   class IngredientReteta
   class Stoc
   class User
-}
-
-package "validator" {
-  interface Validator<T> << interface >>
-  class ValidationException
-  class OrderValidator
-  class OrderItemValidator
-  class ProductValidator
-  class RetetaValidator
-  class StocValidator
-  class UserValidator
 }
 
 ' --- Relatii Extindere / Implementare ---
@@ -102,9 +101,18 @@ DrinkShopService       "1" *-[#595959,plain]-> "productService\n1" ProductServic
 DrinkShopService       "1" *-[#595959,plain]-> "retetaService\n1" RetetaService
 DrinkShopService       "1" *-[#595959,plain]-> "stocService\n1" StocService
 DrinkShopService       "1" *-[#595959,plain]-> "userService\n1" UserService
+DrinkShopService       "1" *-[#595959,plain]-> "csvExporter\n1" CsvExporter
+DrinkShopService       "1" *-[#595959,plain]-> "receiptGenerator\n1" ReceiptGenerator
+
+' --- Relatii Service & Validator ---
+OrderService           "1" *-[#595959,plain]-> "orderValidator\n1" OrderValidator
+ProductService         "1" *-[#595959,plain]-> "productValidator\n1" ProductValidator
+RetetaService          "1" *-[#595959,plain]-> "retetaValidator\n1" RetetaValidator
+StocService            "1" *-[#595959,plain]-> "stocValidator\n1" StocValidator
+UserService            "1" *-[#595959,plain]-> "userValidator\n1" UserValidator
 
 ' --- Relatii UI ---
 DrinkShopController    "1" *-[#595959,plain]-> "service\n1" DrinkShopService
-DrinkShopController    "1" *-[#595959,plain]-> "errorHandler\n1" ErrorHandler
+DrinkShopApp    "1" *-[#595959,plain]-> "controller\n1" DrinkShopController
 
 @enduml
