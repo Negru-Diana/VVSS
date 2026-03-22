@@ -12,11 +12,17 @@ public class ProductValidator implements Validator<Product> {
         if (product.getId() <= 0)
             errors += "ID invalid!\n";
 
-        if (product.getNume() == null || product.getNume().isBlank())
-            errors += "Numele nu poate fi gol!\n";
+        if (product.getNume() == null || product.getNume().trim().isEmpty()) {
+            errors += "Numele nu trebuie sa fie vid!\n";
+        } else if (product.getNume().length() > 50) {
+            errors += "Numele trebuie sa aiba <=50 caractere!\n";
+        }
 
-        if (product.getPret() <= 0)
-            errors += "Pret invalid!\n";
+        if (product.getPret() < 0.0) {
+            errors += "Pretul trebuie sa fie >= 0.0!\n";
+        } else if (product.getPret() > 10000.0) {
+            errors += "Pretul trebuie sa fie <= 10000.0!\n";
+        }
 
         if (!errors.isEmpty())
             throw new ValidationException(errors);
