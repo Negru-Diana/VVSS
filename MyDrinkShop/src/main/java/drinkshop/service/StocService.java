@@ -26,18 +26,21 @@ public class StocService {
 
 
     public boolean areSuficient(Reteta reteta) {
-        List<IngredientReteta> ingredienteNecesare = reteta.getIngrediente();
-
-        for (IngredientReteta e : ingredienteNecesare) {
+        if (reteta == null) {                                    // D1
+            return false;
+        }
+        List<IngredientReteta> ingrediente = reteta.getIngrediente();
+        if (ingrediente == null || ingrediente.isEmpty()) {      // D2, D3
+            return false;
+        }
+        for (IngredientReteta e : ingrediente) {                 // D4 (loop)
             String ingredient = e.getDenumire();
             double necesar = e.getCantitate();
-
             double disponibil = stocRepo.findAll().stream()
                     .filter(s -> s.getIngredient().equalsIgnoreCase(ingredient))
                     .mapToDouble(Stoc::getCantitate)
                     .sum();
-
-            if (disponibil < necesar) {
+            if (disponibil < necesar) {                          // D5
                 return false;
             }
         }
