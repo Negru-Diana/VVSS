@@ -31,6 +31,19 @@
     </dependency>
 
     <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>5.14.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <version>5.14.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-base</artifactId>
       <version>22.0.1</version>
@@ -78,6 +91,7 @@
         <configuration>
           <argLine>
             ${argLine}
+            -Dnet.bytebuddy.experimental=true
             --add-opens drinkshop/drinkshop.service=ALL-UNNAMED
             --add-opens drinkshop/drinkshop.repository=ALL-UNNAMED
             --add-opens drinkshop/drinkshop.domain=ALL-UNNAMED

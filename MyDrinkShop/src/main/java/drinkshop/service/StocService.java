@@ -11,11 +11,16 @@ import java.util.Map;
 
 public class StocService {
 
-    private final StocValidator stocValidator = new StocValidator();
+    private final StocValidator stocValidator;
     private final Repository<Integer, Stoc> stocRepo;
 
     public StocService(Repository<Integer, Stoc> stocRepo) {
+        this(stocRepo, new StocValidator());
+    }
+
+    public StocService(Repository<Integer, Stoc> stocRepo, StocValidator stocValidator) {
         this.stocRepo = stocRepo;
+        this.stocValidator = stocValidator;
     }
 
 

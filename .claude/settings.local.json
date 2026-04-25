@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn test *)",
+      "Bash(./mvnw test *)",
+      "PowerShell($env:JAVA_HOME = \"D:\\\\IntelliJ IDEA 2025.3.2\\\\jbr\"; cd \"D:\\\\VVSS\\\\MyDrinkShop\"; & \"D:\\\\IntelliJ IDEA 2025.3.2\\\\plugins\\\\maven\\\\lib\\\\maven3\\\\bin\\\\mvn.cmd\" test 2>&1 | Select-Object -Last 80)",
+      "PowerShell($env:JAVA_HOME = \"D:\\\\IntelliJ IDEA 2025.3.2\\\\jbr\"; cd \"D:\\\\VVSS\\\\MyDrinkShop\"; & \"D:\\\\IntelliJ IDEA 2025.3.2\\\\plugins\\\\maven\\\\lib\\\\maven3\\\\bin\\\\mvn.cmd\" test 2>&1 | Select-Object -Last 40)",
+      "PowerShell($env:JAVA_HOME = \"D:\\\\IntelliJ IDEA 2025.3.2\\\\jbr\"; cd \"D:\\\\VVSS\\\\MyDrinkShop\"; & \"D:\\\\IntelliJ IDEA 2025.3.2\\\\plugins\\\\maven\\\\lib\\\\maven3\\\\bin\\\\mvn.cmd\" test 2>&1 | Select-Object -Last 25)"
+    ]
+  }
+}
