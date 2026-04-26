@@ -85,12 +85,11 @@ public class ProductServiceTest {
 
     // CAZURI BVA
 
-    @ParameterizedTest
-    @CsvSource({"1, M", "50, MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"})
-    @DisplayName("BVA Valid: Limitele acceptate pentru lungimea numelui [1, 50]")
-    void testAddProduct_ValidNameLength_BVA(int length, String testName) {
+    @Test
+    @DisplayName("BVA Valid: Limita minima pentru lungimea numelui (1 caracter)")
+    void testAddProduct_ValidNameLength_BVA() {
         // Arrange
-        Product p = new Product(6, testName, 5.0, CategorieBautura.JUICE, TipBautura.BASIC);
+        Product p = new Product(6, "M", 5.0, CategorieBautura.JUICE, TipBautura.BASIC);
 
         // Act
         productService.addProduct(p);
@@ -98,7 +97,22 @@ public class ProductServiceTest {
         // Assert
         Product saved = productService.findById(6);
         assertNotNull(saved);
-        assertEquals(length, saved.getNume().length());
+        assertEquals(1, saved.getNume().length());
+    }
+
+    @Test
+    @DisplayName("BVA Valid: Limita maxima pentru lungimea numelui (50 caractere)")
+    void testAddProduct_ValidNameLength50_BVA() {
+        // Arrange
+        Product p = new Product(6, "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM", 5.0, CategorieBautura.JUICE, TipBautura.BASIC);
+
+        // Act
+        productService.addProduct(p);
+
+        // Assert
+        Product saved = productService.findById(6);
+        assertNotNull(saved);
+        assertEquals(50, saved.getNume().length());
     }
 
     @Test
