@@ -89,13 +89,8 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.5</version>
         <configuration>
-<!--          <argLine>-->
-<!--            ${argLine}-->
-<!--            -Dnet.bytebuddy.experimental=true-->
-<!--            &#45;&#45;add-opens drinkshop/drinkshop.service=ALL-UNNAMED-->
-<!--            &#45;&#45;add-opens drinkshop/drinkshop.repository=ALL-UNNAMED-->
-<!--            &#45;&#45;add-opens drinkshop/drinkshop.domain=ALL-UNNAMED-->
-<!--          </argLine>-->
+          <useModulePath>false</useModulePath>
+          <argLine>${argLine} -Dnet.bytebuddy.experimental=true</argLine>
         </configuration>
       </plugin>
       <plugin>
