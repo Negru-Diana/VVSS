@@ -76,9 +76,13 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
         <configuration>
+          <useModulePath>false</useModulePath>
           <excludes>
             <exclude>module-info.java</exclude>
           </excludes>
+          <testExcludes>
+            <testExclude>module-info.java</testExclude>
+          </testExcludes>
         </configuration>
       </plugin>
       <plugin>
