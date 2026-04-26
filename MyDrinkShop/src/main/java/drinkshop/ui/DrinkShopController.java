@@ -120,7 +120,7 @@ public class DrinkShopController {
             showError("Selectati o reteta pentru care adugati un produs");
             return;
         }else
-        if (!service.getAllProducts().stream().filter(p->p.getId()==r.getId()).toList().isEmpty()) {
+        if (!service.getAllProducts().stream().filter(p->p.getId()==r.getId()).collect(Collectors.toList()).isEmpty()) {
             showError("Exista un produs cu reteta adaugata.");
             return;
         }

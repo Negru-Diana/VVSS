@@ -5,6 +5,7 @@ import drinkshop.repository.Repository;
 import drinkshop.service.validator.ProductValidator;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class ProductService {
@@ -42,13 +43,13 @@ public class ProductService {
         if (categorie == CategorieBautura.ALL) return getAllProducts();
         return getAllProducts().stream()
                 .filter(p -> p.getCategorie() == categorie)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public List<Product> filterByTip(TipBautura tip) {
         if (tip == TipBautura.ALL) return getAllProducts();
         return getAllProducts().stream()
                 .filter(p -> p.getTip() == tip)
-                .toList();
+                .collect(Collectors.toList());
     }
 }

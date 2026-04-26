@@ -4,8 +4,8 @@
   <artifactId>MyDrinkShop</artifactId>
   <version>1.0-SNAPSHOT</version>
   <properties>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
     <javafx.version>21</javafx.version>
     <junit.version>5.10.0</junit.version>
   </properties>
@@ -89,13 +89,13 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.5</version>
         <configuration>
-          <argLine>
-            ${argLine}
-            -Dnet.bytebuddy.experimental=true
-            --add-opens drinkshop/drinkshop.service=ALL-UNNAMED
-            --add-opens drinkshop/drinkshop.repository=ALL-UNNAMED
-            --add-opens drinkshop/drinkshop.domain=ALL-UNNAMED
-          </argLine>
+<!--          <argLine>-->
+<!--            ${argLine}-->
+<!--            -Dnet.bytebuddy.experimental=true-->
+<!--            &#45;&#45;add-opens drinkshop/drinkshop.service=ALL-UNNAMED-->
+<!--            &#45;&#45;add-opens drinkshop/drinkshop.repository=ALL-UNNAMED-->
+<!--            &#45;&#45;add-opens drinkshop/drinkshop.domain=ALL-UNNAMED-->
+<!--          </argLine>-->
         </configuration>
       </plugin>
       <plugin>
