@@ -3,12 +3,8 @@ package mydrinkshop.service;
 /**
  * Lab04 — Integration Testing (top-down incremental, Scenario 1: V <--- S ---> R)
  * ---------------------------------------------------------------------------------
- * STEP 4: Integram E (Stoc real)
- *         V = real, R = real, E = real — niciun mock
+ * STEP 4: Integram E (Stoc real) V = real, R = real, E = real — niciun mock
  *
- * Scop: testare end-to-end completa. Toate componentele sunt reale.
- *       Un defect gasit aici (dar nu in Step 2/3) indica o problema
- *       in interactiunea dintre toate trei componentele impreuna.
  */
 
 import drinkshop.domain.IngredientReteta;

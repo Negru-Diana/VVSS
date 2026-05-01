@@ -3,11 +3,8 @@ package mydrinkshop.service;
 /**
  * Lab04 — Integration Testing (top-down incremental, Scenario 1: V <--- S ---> R)
  * ---------------------------------------------------------------------------------
- * STEP 2: Integram V (StocValidator real)
- *         R = mock, E = mock
+ * STEP 2: Integram V (StocValidator real) R = mock, E = mock
  *
- * Scop: verificam ca S colaboreaza corect cu validatorul real,
- *       fara sa depindem inca de persistenta (R) sau de constructorul lui Stoc (E).
  */
 
 import drinkshop.domain.IngredientReteta;
@@ -58,7 +55,7 @@ class StocServiceStep2Test {
     @Test
     @DisplayName("IT2-03 - areSuficient() cu mock E returnat de mock R → true")
     void it2_03_areSuficient_mockE_inMockR_returnsTrue() {
-        // E (Stoc) – mock: configuram doar metodele apelate de areSuficient()
+
         Stoc mockStoc = mock(Stoc.class);
         when(mockStoc.getIngredient()).thenReturn("lapte");
         when(mockStoc.getCantitate()).thenReturn(200.0);

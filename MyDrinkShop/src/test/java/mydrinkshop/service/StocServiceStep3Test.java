@@ -3,11 +3,8 @@ package mydrinkshop.service;
 /**
  * Lab04 — Integration Testing (top-down incremental, Scenario 1: V <--- S ---> R)
  * ---------------------------------------------------------------------------------
- * STEP 3: Integram R (AbstractRepository in-memory real)
- *         V = real (deja integrat la Step 2), E = mock
+ * STEP 3: Integram R (AbstractRepository in-memory real) V = real (deja integrat la Step 2), E = mock
  *
- * Scop: verificam ca S + V real colaboreaza corect cu repo-ul real,
- *       folosind mock pentru E (Stoc) ca sa controlam exact datele din repo.
  */
 
 import drinkshop.domain.IngredientReteta;
@@ -44,8 +41,6 @@ class StocServiceStep3Test {
     void it3_01_areSuficient_mockE_storedInRealRepo_returnsTrue() {
         AbstractRepository<Integer, Stoc> realRepo = buildInMemoryRepo();
 
-        // E (Stoc) – mock salvat in real R
-        // getId() necesar pentru ca repo-ul cheama getId() la save()
         Stoc mockStoc = mock(Stoc.class);
         when(mockStoc.getId()).thenReturn(1);
         when(mockStoc.getIngredient()).thenReturn("lapte");
